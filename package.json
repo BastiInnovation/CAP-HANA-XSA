@@ -1,0 +1,23 @@
+{
+    "name": "cap-prototype",
+    "version": "1.0.0",
+    "description": "",
+    "author": "tobias.trapp@ifm.com",
+    "private": true,
+    "license": "UNLICENSED",
+    "scripts": {
+        "start": "npm-run-all --parallel local:approuter local:backend",
+        "local:approuter": "npm install --prefix approuter && npm start --prefix approuter",
+        "local:backend": "npm run start:dev --prefix backend",
+        "generate-vdm": "generate-odata-client --optionsPerService edmx/options-per-service.json --input edmx --outputDir backend/src/vdm --clearOutputDir --packageJson false --skipValidation",
+        "upgrade": "ncu --deep -i",
+        "test": "npm run test:e2e --prefix backend",
+        "audit": "npm audit --prefix approuter && npm audit --prefix backend",
+        "audit:prod": "npm audit --omit=dev --audit-level=high --prefix approuter && npm audit --omit=dev --audit-level=high --prefix backend"
+    },
+    "devDependencies": {
+        "@sap-cloud-sdk/generator": "^3.25.0",
+        "npm-check-updates": "^17.1.13",
+        "npm-run-all": "^4.1.5"
+    }
+}

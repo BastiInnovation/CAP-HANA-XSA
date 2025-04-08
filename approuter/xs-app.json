@@ -1,0 +1,31 @@
+{
+    "welcomeFile": "index.html",
+    "authenticationMethod": "route",
+    "logout": {
+      "logoutEndpoint": "/logout",
+      "logoutPage": "/index.html"
+    },
+    "routes": [
+      {
+        "source": "/odata/(.*)$",
+        "target": "/odata/$1",
+        "destination": "backend"
+      },
+      {
+        "source": "/api/(.*)$",
+        "target": "/$1",
+        "destination": "backend"
+      },
+      {
+        "source": "/currentUser",
+        "target": "/user-api/currentUser",
+        "service": "sap-approuter-userapi"
+      },
+      {
+        "source": "^/(.*)",
+        "target": "$1",
+        "cacheControl": "no-cache, no-store, must-revalidate",
+        "destination": "frontend"
+      }
+    ]
+  }

@@ -1,0 +1,83 @@
+{
+  "namespace": "proto",
+  "definitions": {
+    "proto.Sample": {
+      "kind": "entity",
+      "elements": {
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "name": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "proto.Plants": {
+      "kind": "entity",
+      "elements": {
+        "plant": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "plantName": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "SampleService": {
+      "kind": "service"
+    },
+    "SampleService.Sample": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@readonly": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "proto.Sample"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "name": {
+          "type": "cds.String"
+        }
+      },
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false
+    },
+    "SampleService.Plants": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "proto.Plants"
+          ]
+        }
+      },
+      "elements": {
+        "plant": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "plantName": {
+          "type": "cds.String"
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v5.4.2",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}
