@@ -13,19 +13,6 @@
         }
       }
     },
-    "proto.Plants": {
-      "kind": "entity",
-      "elements": {
-        "plant": {
-          "key": true,
-          "type": "cds.String",
-          "length": 4
-        },
-        "plantName": {
-          "type": "cds.String"
-        }
-      }
-    },
     "SampleService": {
       "kind": "service"
     },
@@ -52,32 +39,12 @@
       "@Capabilities.DeleteRestrictions.Deletable": false,
       "@Capabilities.InsertRestrictions.Insertable": false,
       "@Capabilities.UpdateRestrictions.Updatable": false
-    },
-    "SampleService.Plants": {
-      "kind": "entity",
-      "@cds.persistence.skip": true,
-      "projection": {
-        "from": {
-          "ref": [
-            "proto.Plants"
-          ]
-        }
-      },
-      "elements": {
-        "plant": {
-          "key": true,
-          "type": "cds.String",
-          "length": 4
-        },
-        "plantName": {
-          "type": "cds.String"
-        }
-      }
     }
   },
   "meta": {
     "creator": "CDS Compiler v5.4.2",
-    "flavor": "inferred"
+    "flavor": "inferred",
+    "minified": true
   },
   "$version": "2.0"
 }

@@ -1,0 +1,49 @@
+_schema-version: 3.3.0
+ID: Protocap
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+modules:
+  - name: protocap-backend
+    type: nodejs
+    path: backend/deployment/
+    parameters:
+      buildpack: sap_nodejs_buildpack
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: protocap-xsuaa
+  - name: protocap-approuter
+    type: nodejs
+    path: approuter/
+    parameters:
+      buildpack: sap_nodejs_buildpack
+    build-parameters:
+      builder: npm
+    requires:
+      - name: protocap-xsuaa
+        group: destinations
+        properties:
+          name: backend
+          url: ((URL))
+          forwardAuthToken: true
+resources:
+  - name: protocap-xsuaa
+    type:  com.sap.xs.uaa
+    parameters:
+      service: xsuaa
+      service-plan: default
+      path: ./approuter/xs-security.json
+      config:
+        xsappname: protocap-backend
+        tenant-mode: dedicated

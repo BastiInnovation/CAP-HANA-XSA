@@ -9,14 +9,14 @@
 /frontend/dist
 /frontend/deployment
 /approuter/node_modules
+mta_archives/
 
 # Secrets
 cf-secrets.yml
 default-*.json
 .env
 
-/package-lock.json
-/**/package-lock.json
+
 
 # Logs
 logs
@@ -55,4 +55,3 @@ target/
 /test/simulation
 .vscode/launch.json
 .vscode/settings.json
-backend/package-lock.json
