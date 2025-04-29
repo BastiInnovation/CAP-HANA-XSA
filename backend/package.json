@@ -30,7 +30,7 @@
         "@sap-cloud-sdk/odata-v2": "^3.25.0",
         "@sap/cds": "^8.6.0",
         "@sap/xsenv": "^5.4.0",
-        "@sap/xssec": "^4.2.7",
+        "@sap/xssec": "^4.6.0",
         "helmet": "^8.0.0",
         "passport": "^0.7.0"
     },
