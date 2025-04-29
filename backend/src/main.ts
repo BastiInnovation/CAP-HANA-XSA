@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { v3 } from '@sap/xssec';
+import { XsaService,XssecPassportStrategy } from '@sap/xssec';
 import { Passport } from 'passport';
 import helmet from 'helmet'
 import * as xsenv from '@sap/xsenv';
@@ -19,7 +19,8 @@ async function bootstrap() {
   app.getHttpAdapter().getInstance().disable('x-powered-by');
   if(! process.env.DEBUG ) {
     const passport = new Passport();
-    passport.use(new v3.JWTStrategy(xsenv.getServices({uaa:{tag:'xsuaa'}}).uaa, ''));
+    const authService = new XsaService(xsenv.getServices({uaa: {tag: 'xsuaa'}}).uaa);
+    passport.use(new XssecPassportStrategy(authService));
     app.use(passport.initialize());
     app.use(unless(passport.authenticate('JWT', {session: false}), '/callback/v1.0/', '/api/onboarding/', '/api/offboarding/'));
   }
